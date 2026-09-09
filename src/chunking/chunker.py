@@ -32,9 +32,12 @@ def chunk_documents(documents,chunk_size,overlap):
             start+=chunk_size-overlap
     return chunks
 
-documents=loader.load_files()
-processed_chunks=chunk_documents(documents,100,10)
-for chunk in processed_chunks[:3]:
-    print(f"source:{chunk['metadata']['source']} | ID: {chunk['metadata']['chunk_id']}")
-    print(f"content:{chunk['text']}\n{'-'*30}")
+
+def chunk_docs():
+    documents=loader.load_files()
+    processed_chunks=chunk_documents(documents,100,10)
+    # for chunk in processed_chunks[:3]:
+    #     print(f"source:{chunk['metadata']['source']} | ID: {chunk['metadata']['chunk_id']}")
+    #     print(f"content:{chunk['text']}\n{'-'*30}")
+    return processed_chunks
     
