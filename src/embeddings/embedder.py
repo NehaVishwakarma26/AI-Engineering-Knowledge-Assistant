@@ -7,8 +7,8 @@ if str(src_path) not in sys.path:
     sys.path.append(str(src_path))
 
 from chunking import chunker
-
 import ollama
+import chromadb
 
 def get_embeddings(text:str,model_name:str="embeddinggemma:latest")->list[float]:
     """Generate a raw embedding vector using a locally running Ollama instance"""
@@ -29,21 +29,31 @@ def get_embeddings_batch(text:list[str],model_name:str="embeddinggemma:latest")-
     
     return response['embeddings']
 
+def store_chunks(chunks,vectors):
+    client=chromadb.PersistentClient(path="./my_chroma_db")
+    collection=client.get_or_create_collection(name="document_chunks")
+    documents=[chunk['text'] for chunk in chunks]
+    metadatas=[
+        {
+            "source":chunk["metadata"]["source"],
+            "chunk_id":str(chunk["metadata"]["chunk_id"])
+        }
+        for chunk in chunks
+    ]
+    ids=[
+        f"{chunk["metadata"]["source"]}_{chunk["metadata"]["chunk_id"]}"
+        for chunk in chunks
+    ]
+    collection.add(
+        documents=documents,
+        embeddings=vectors,
+        metadatas=metadatas,
+        ids=ids
+    )
+    
 if __name__=="__main__":
-    sample_text="Retrieval Augmented Generation handles complex local documents."
-    vector=get_embeddings(sample_text)
-    
-    print("Vector calculation successful")
-    print(f"Embedding dimensions: {len(vector)}") 
-    print(f"snippet sample: {vector[:5]}...\n")
-    
     chunks=chunker.chunk_docs()
-    chunks_string=chunks_string = [
-    f"{chunk['metadata']['source']} {str(chunk['metadata']['chunk_id'])} {chunk['text']}" 
-    for chunk in chunks
-]
+    chunks_string=[chunk["text"] for chunk in chunks]
     vectors=get_embeddings_batch(chunks_string)
-    print("\n\n\n")
-    print("embedding batches")
-    for i,vec in enumerate(vectors[:3]):
-        print(f"vector {i+1} preview first 5 dimensions {vec[:5]}")
+    store_chunks(chunks,vectors)
+    print(f"stored {len(chunks)} chunks in chroadb")
