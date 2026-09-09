@@ -1,0 +1,26 @@
+# --- uv / Environment Specific ---
+.venv/
+.uv/
+
+# --- Python Runtime Cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Local Secrets / Configurations ---
+.env
+.env.*
+!.env.example
+
+# --- IDEs and Editors ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
