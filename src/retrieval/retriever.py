@@ -10,7 +10,7 @@ from embeddings import embedder
 import chromadb
 
 def retrieve(query,top_k=3):
-    client=chromadb.PersistentClient(path="./my_chroma_db")
+    client=chromadb.PersistentClient(path="./new_chroma_db")
     collection=client.get_collection(name="document_chunks")
     query_embedding=embedder.get_embeddings(query)
     
