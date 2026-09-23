@@ -24,3 +24,6 @@ __pycache__/
 # --- OS Specific ---
 .DS_Store
 Thumbs.db
+
+my_chroma_db
+new_chroma_db
