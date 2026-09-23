@@ -1,0 +1,15 @@
+Reranking is a second-stage retrieval technique used to improve the ordering of an initial candidate set. Instead of asking an expensive relevance model to score an entire corpus, a fast retriever first produces a manageable set of candidates and a stronger model then evaluates those candidates more carefully.
+
+A typical retrieval pipeline can contain three stages: candidate generation, reranking, and answer generation. Candidate generation may use dense vector search, BM25, or hybrid retrieval. Reranking receives the query and each candidate passage and estimates how relevant that passage is to the query.
+
+Cross-encoder rerankers are one common approach. Unlike bi-encoder embedding models that independently encode the query and document, a cross-encoder processes the query and candidate together. This allows detailed token-level interactions but is more computationally expensive.
+
+Reranking is useful when the first-stage retrieval returns several plausible candidates but their ordering is imperfect. For example, hybrid search may retrieve ten candidates containing useful information. A reranker can reorder those candidates so that the passages most directly answering the question appear first.
+
+The candidate pool should be larger than the final context size. A system might retrieve 20 or 50 candidates and rerank them before selecting the top 5. The appropriate values depend on latency, model size, and corpus size.
+
+Reranking introduces latency and computational cost. It should therefore be applied after inexpensive retrieval rather than to the entire document collection.
+
+Reranking quality should be evaluated separately from candidate generation. If the relevant document never enters the candidate pool, a reranker cannot recover it. This is why recall at the candidate-generation stage is an important metric.
+
+A mature RAG system can therefore use contextualized chunks, dense retrieval, BM25, reciprocal rank fusion, reranking, and finally generation. Each stage has a distinct responsibility.

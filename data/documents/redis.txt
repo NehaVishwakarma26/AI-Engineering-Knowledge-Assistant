@@ -1,0 +1,17 @@
+Redis is an in-memory data store commonly used for caching, counters, distributed coordination, queues, and other low-latency workloads. Data is stored in memory, which makes many operations fast.
+
+Caching can reduce database load and application latency. A cache-aside strategy commonly checks Redis first. If the value is absent, the application reads from the primary database and then stores the result in Redis.
+
+Cache invalidation is a major design concern. Cached data can become stale when the source of truth changes. TTL values provide automatic expiration, while explicit invalidation can remove or update keys after writes.
+
+Redis supports several data structures including strings, hashes, lists, sets, sorted sets, and streams. The appropriate structure depends on the access pattern.
+
+Distributed locks can coordinate work across application instances, but they must be designed carefully. Lock expiration, ownership, retries, and failure scenarios all matter.
+
+Redis can also be used for rate limiting. A service can maintain counters associated with users or API keys and reject requests after a configured threshold.
+
+Pub/sub provides a lightweight messaging mechanism, while Redis Streams provide a more durable event-oriented structure with consumer groups.
+
+Persistence options allow Redis data to survive process restarts, but Redis should not automatically be treated as a replacement for a durable relational database. The correct durability configuration depends on the workload.
+
+Operational considerations include memory limits, eviction policies, monitoring, connection pooling, key naming, TTL management, and avoiding extremely large values.

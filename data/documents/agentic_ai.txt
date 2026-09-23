@@ -1,0 +1,15 @@
+An AI agent is a software system in which a language model participates in a loop involving decisions, tools, observations, and further actions. A simple LLM call maps an input to an output, while an agent can decide what action should happen next.
+
+Agentic workflows can contain deterministic steps such as prompt chaining, routing, and parallel execution. More autonomous agents can select tools and determine their next actions based on intermediate results.
+
+Tool calling allows a model to request a specific software function. Tools might include search, database access, filesystem operations, code execution, APIs, or project-management systems. The application should validate tool arguments and enforce permissions rather than allowing arbitrary operations.
+
+An orchestrator-worker architecture uses one component to decompose a task and other components to perform specialized subtasks. An evaluator-optimizer pattern uses one model or process to critique an output and another iteration to improve it.
+
+Agentic RAG combines retrieval with iterative reasoning. An agent may decide that it needs project documentation, retrieve relevant information, inspect the result, and then perform another retrieval with a refined query.
+
+Memory can be divided into short-term conversation state and longer-lived information. Long-term memory should be selective and structured rather than blindly storing every conversation.
+
+Agents introduce additional failure modes. They can select inappropriate tools, enter loops, make incorrect assumptions, or spend excessive computation. Production agents therefore need limits on iterations, tool permissions, time, and resource usage.
+
+For software engineering assistants, useful agent tasks include repository investigation, test failure analysis, documentation lookup, code review, and controlled project modifications.

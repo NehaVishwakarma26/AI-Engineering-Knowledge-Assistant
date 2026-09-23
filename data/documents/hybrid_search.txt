@@ -1,0 +1,17 @@
+Hybrid search combines multiple retrieval strategies so that the strengths of one method can compensate for weaknesses in another. In technical knowledge systems, a common combination is dense semantic retrieval and lexical retrieval using BM25.
+
+Dense retrieval converts a query into an embedding and finds semantically similar chunks. It is effective when the query uses different wording from the source. For example, a question about giving an LLM external knowledge may retrieve passages describing grounded generation even if the phrase external knowledge does not occur.
+
+Lexical retrieval operates on words and term frequencies. BM25 is a popular ranking function for keyword search. It rewards terms that occur in a document while accounting for document length and the fact that common words are less informative.
+
+Dense and lexical scores are not normally directly comparable. A vector similarity score and a BM25 score have different scales and meanings. A common way to combine their rankings is Reciprocal Rank Fusion (RRF).
+
+RRF uses the rank position assigned by each retriever rather than directly adding raw scores. A simplified formula is RRF(d) = sum over retrievers of 1 divided by k plus rank(d), where k is a smoothing constant often set to 60.
+
+For example, if a chunk is ranked second by dense retrieval and first by BM25, its fused score is 1/(60+2) + 1/(60+1). A chunk appearing near the top in both retrieval lists receives contributions from both systems.
+
+A practical hybrid pipeline retrieves a candidate pool from each retriever, often larger than the final number of results. For example, dense retrieval may return 20 candidates and BM25 may return 20 candidates. RRF merges those candidates and produces a smaller final set such as five chunks.
+
+Candidate depth matters. If each retriever returns only three candidates, a relevant document ranked fourth by both systems cannot reach the fusion stage. Increasing the candidate pool gives fusion more evidence but increases computation.
+
+Hybrid retrieval is especially useful for technical knowledge because semantic similarity handles conceptual questions while lexical search handles exact API names, class names, error messages, acronyms, and configuration keys.

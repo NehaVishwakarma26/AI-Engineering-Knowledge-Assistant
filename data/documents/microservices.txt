@@ -1,0 +1,17 @@
+Microservices architecture decomposes an application into independently deployable services organized around business capabilities. Each service owns a focused responsibility and communicates with other services through APIs or messaging.
+
+Service boundaries should reflect meaningful domain responsibilities rather than simply splitting a monolith into many small applications. Excessive fragmentation can create network overhead, operational complexity, distributed transactions, and difficult debugging.
+
+Synchronous communication is commonly implemented with HTTP or gRPC. Asynchronous communication can use message brokers such as RabbitMQ or Kafka. Messaging can decouple producers and consumers and is useful when work does not need to complete within the original request.
+
+Service discovery allows services to find one another without hardcoding every network location. A registry can maintain information about available service instances. Load balancing distributes requests across instances.
+
+Configuration management separates environment-specific settings from application code. Secrets should be stored securely rather than committed to source control.
+
+Observability is essential in distributed systems. Logs, metrics, traces, correlation IDs, and health checks help engineers understand requests that cross service boundaries.
+
+Authentication and authorization should be designed consistently. OAuth2 and OpenID Connect are common standards for identity and delegated access. A gateway can enforce some cross-cutting policies, but services should still validate security-sensitive information where appropriate.
+
+Distributed systems require careful handling of retries, timeouts, idempotency, circuit breaking, and partial failures. A service that waits indefinitely for another service can exhaust resources and cause cascading failures.
+
+Containers are commonly used to package microservices. Docker Compose can provide a convenient local environment containing multiple services and infrastructure dependencies such as PostgreSQL, Redis, and RabbitMQ.

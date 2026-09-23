@@ -10,7 +10,9 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import ChatOllama
 
 from ingestion import loader
+import json
 
+CACHE_PATH=Path("./data/contextualized_chunks.json")
 # define llm
 llm=ChatOllama(
     model="llama3.1:latest",
@@ -76,6 +78,11 @@ Only use information that can be inferred from the document.
     return contextualized_chunks    
     
 def get_final_chunks():
+    if CACHE_PATH.exists():
+        print("Loading cached contextualized chunks...")
+        with open(CACHE_PATH,"r",encoding="utf-8") as file:
+            return json.load(file)
+        
     final_chunks=[]
     documents=loader.load_files()
     for doc in documents:
@@ -90,8 +97,16 @@ def get_final_chunks():
         print("\n\n Example:")
         print(chunks[0])
         final_chunks.extend(chunks)
+        
+    CACHE_PATH.parent.mkdir(parents=True,exist_ok=True)
+    
+    with open(CACHE_PATH,"w",encoding="utf-8") as file:
+        json.dump(final_chunks,file,indent=2,ensure_ascii=False)
+        
+    print(f"saved {len(final_chunks)} contextualized chunks to cache")
     return final_chunks
 
-final_chunks=get_final_chunks()
-print(f"{len(final_chunks)} generated")
-print(final_chunks[0])
+if __name__=="__main__":
+    final_chunks=get_final_chunks()
+    print(f"{len(final_chunks)} generated")
+    print(final_chunks[0])

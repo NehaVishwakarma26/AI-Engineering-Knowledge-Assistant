@@ -1,1 +1,15 @@
-The Transformer architecture, introduced by Vaswani et al. in 2017, revolutionised natural language processing by dispensing with recurrence and convolutions entirely. Its core innovation is the self-attention mechanism, specifically scaled dot-product attention. The mechanism computes an attention function on a set of queries simultaneously, packed together into a matrix Q. The keys and values are also packed together into matrices K and V. The matrix of outputs is computed as: Attention(Q, K, V) = softmax((QK^T) / sqrt(d_k))V. By relying purely on attention mechanisms, Transformers allow for significantly more parallelization during training compared to RNNs and LSTMs, leading to the rapid scaling of Large Language Models (LLMs).
+The Transformer architecture was introduced by Vaswani and colleagues in 2017 and became the foundation for many modern language models. Transformers replaced recurrence with attention mechanisms that allow tokens to interact directly.
+
+Self-attention computes relationships between tokens using query, key, and value representations. Given matrices Q, K, and V, scaled dot-product attention is commonly expressed as softmax(QK transpose divided by the square root of the key dimension) multiplied by V.
+
+Multi-head attention allows the model to learn different types of relationships in parallel. Each attention head can focus on different aspects of the input. The outputs of the heads are combined and passed through additional transformations.
+
+Transformer blocks commonly contain attention, a feed-forward network, residual connections, and normalization. Positional information is required because attention itself does not inherently encode the order of tokens. Different transformer implementations use different positional encoding strategies.
+
+Transformers support significant parallelism during training compared with recurrent neural networks. This property contributed to their scalability and made them suitable for large datasets and large model sizes.
+
+Large language models use transformer-based architectures to predict or generate tokens. During inference, the model receives a context consisting of instructions, conversation history, retrieved evidence, and the current user request.
+
+Attention has computational costs that grow with sequence length. Context-window size therefore matters for applications that retrieve many documents or include large project files. Retrieval systems help by selecting only information that is likely to be useful.
+
+Transformer representations also support tasks beyond generation, including classification, retrieval, reranking, summarization, translation, and code understanding.

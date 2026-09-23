@@ -1,0 +1,15 @@
+BM25 is a lexical information retrieval ranking function based on term frequency, inverse document frequency, and document length normalization. It is widely used in search engines and information retrieval systems.
+
+The intuition behind BM25 is straightforward. A term that occurs in a query and appears frequently in a particular document contributes evidence that the document is relevant. A term appearing in many documents is less discriminative and therefore contributes less. Document length is also considered so that very long documents do not receive an unfair advantage simply because they contain more terms.
+
+BM25 tokenization is an important practical consideration. A simple implementation may lowercase text and split on whitespace. Production systems often use more sophisticated tokenization, stemming, stop-word handling, punctuation processing, or language-specific analyzers.
+
+BM25 is particularly useful for exact technical terminology. A query containing OAuth2, Eureka, PersistentClient, HTTP 429, or NullPointerException can benefit from lexical matching because the exact token can be highly informative.
+
+BM25 does not understand meaning in the same way as an embedding model. A passage can be conceptually relevant while sharing few words with the query, and BM25 may rank it poorly. Dense retrieval provides complementary semantic matching.
+
+The rank-bm25 Python package provides a simple BM25 implementation. It can be used to build an in-memory index from tokenized documents and obtain a score for every document for a query. The highest scoring document indexes can then be returned.
+
+For a production system, the BM25 index should not be rebuilt for every query. Index construction should be a separate ingestion step. The resulting index should be persisted or maintained by a dedicated search engine when the dataset becomes large.
+
+BM25 is therefore best viewed as one component of a retrieval architecture rather than a replacement for semantic search.

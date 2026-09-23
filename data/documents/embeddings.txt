@@ -1,0 +1,13 @@
+Embeddings are numerical vectors that represent information in a continuous space. In natural language applications, an embedding model converts text into a vector containing many floating-point values. Texts with related meanings can produce vectors that are close under a similarity metric.
+
+Embedding models are different from generative language models. A generative model such as Llama can produce text, while an embedding model is optimized to represent input information for comparison, clustering, or retrieval.
+
+A typical semantic search pipeline embeds every document chunk during indexing. When a user submits a query, the same embedding model is used to embed the query. The retrieval system compares the query vector with stored vectors and returns the nearest candidates.
+
+Using the same embedding model for documents and queries is important because the vectors need to live in a compatible representation space. Changing the embedding model usually requires re-indexing the collection.
+
+Chunk representation affects embedding quality. A chunk with insufficient context may produce an ambiguous representation. A contextual retrieval approach can prepend or associate a concise description of where the chunk belongs in the document before generating its embedding. The original chunk can still be preserved separately for generation.
+
+Embedding dimensions, normalization, distance metrics, model domain, and language coverage can affect retrieval performance. A model that performs well on general text may behave differently on source code, API documentation, scientific papers, or highly specialized terminology.
+
+Embedding retrieval is semantic rather than exact. A query about storing vectors may retrieve a passage describing vector databases even when the query and passage do not share many exact words. However, semantic retrieval can sometimes miss exact identifiers or terminology. Hybrid retrieval addresses this by combining embeddings with lexical search.

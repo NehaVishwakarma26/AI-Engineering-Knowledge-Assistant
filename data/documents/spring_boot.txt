@@ -1,0 +1,19 @@
+Spring Boot is a Java framework for building production applications with Spring. It provides auto-configuration, dependency management, embedded servers, and conventions that reduce boilerplate.
+
+A typical Spring Boot application starts from a class annotated with @SpringBootApplication. This annotation combines configuration, component scanning, and auto-configuration behavior.
+
+Dependency injection allows Spring-managed components to receive their dependencies rather than constructing them directly. Common annotations include @Component, @Service, @Repository, and @RestController.
+
+REST APIs can be implemented with controller classes. Request mappings connect HTTP methods and paths to Java methods. DTOs can separate API representations from internal persistence models.
+
+Spring Data simplifies database access through repository abstractions. Applications can use relational databases such as PostgreSQL or MySQL and configure data sources through application properties or YAML.
+
+Spring Security provides authentication and authorization mechanisms. OAuth2 resource servers can validate access tokens issued by an identity provider. Role and authority checks can protect application endpoints.
+
+Spring Cloud adds tools useful in distributed systems, including configuration management, service discovery, and other cloud-native patterns. Eureka can act as a service registry in architectures that use it.
+
+Messaging integrations allow applications to communicate asynchronously with systems such as RabbitMQ. Consumers should handle retries, duplicate messages, and failures carefully.
+
+Actuator exposes operational endpoints such as health and metrics. These endpoints can support monitoring and deployment checks, but sensitive endpoints should be secured.
+
+Testing can include unit tests, integration tests, controller tests, and repository tests. A good architecture makes components independently testable through dependency injection and clear interfaces.

@@ -1,0 +1,15 @@
+Large language model inference is the process of using a trained model to produce outputs for an input prompt. The input may contain system instructions, user messages, retrieved documents, tool results, and conversation history.
+
+Inference begins with tokenization. Text is converted into tokens that the model processes. The model predicts a probability distribution over possible next tokens. A decoding strategy then selects tokens until a stopping condition is reached.
+
+Temperature controls the randomness of token selection by modifying the distribution before sampling. Lower temperatures generally produce more deterministic outputs, while higher temperatures allow more variation. Deterministic settings are often useful for retrieval evaluation and structured engineering tasks.
+
+Context length limits how much information can be supplied to a model in a single request. A RAG system therefore has to select useful evidence rather than blindly inserting an entire corpus into the prompt.
+
+Local inference can be performed using tools such as Ollama. Running a model locally can reduce dependency on external APIs and can be useful for privacy-sensitive development. The tradeoffs include memory requirements, model size, inference speed, and hardware limitations.
+
+Quantization reduces the precision used to represent model weights and can lower memory requirements. Common approaches include 8-bit and 4-bit quantization. Quantization can make local models practical on consumer hardware, although quality and speed can vary.
+
+Streaming returns generated tokens incrementally rather than waiting for the complete response. It can improve perceived responsiveness in interactive applications.
+
+Production inference systems should monitor latency, failures, throughput, context size, and model behavior. Caching can reduce repeated computation for identical or highly similar requests.

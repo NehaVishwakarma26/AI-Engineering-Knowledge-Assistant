@@ -1,0 +1,21 @@
+System design is the process of deciding how software components interact to satisfy functional and non-functional requirements. A design should begin with requirements rather than technology choices.
+
+Functional requirements describe what the system must do. Non-functional requirements describe properties such as availability, latency, throughput, durability, consistency, security, and scalability.
+
+A typical design exercise starts by estimating traffic and data volume. Requests per second, peak traffic, storage growth, object sizes, and read/write ratios influence architecture decisions.
+
+Load balancing distributes traffic across multiple application instances. Horizontal scaling adds instances rather than relying on a single increasingly powerful machine.
+
+Caching can reduce latency and database load. Common cache locations include client-side caches, CDNs, reverse proxies, application caches, and distributed caches such as Redis.
+
+Databases involve tradeoffs between relational and non-relational models. Relational databases provide transactions, constraints, joins, and mature query capabilities. Key-value, document, wide-column, and graph databases optimize for different access patterns.
+
+Replication creates multiple copies of data for availability and read scaling. Partitioning or sharding distributes data across multiple nodes. These techniques introduce complexity around consistency, routing, rebalancing, and failures.
+
+Asynchronous queues can absorb bursts and decouple producers from consumers. However, asynchronous processing introduces concerns such as retries, duplicate messages, ordering, dead-letter queues, and eventual consistency.
+
+Reliability engineering includes timeouts, retries with backoff, circuit breakers, idempotency, health checks, graceful degradation, and disaster recovery.
+
+Observability combines logs, metrics, and distributed traces. Correlation identifiers help connect events belonging to a single request across multiple services.
+
+Security should be considered throughout the architecture. Authentication, authorization, encryption, secret management, input validation, rate limiting, and auditing are architectural concerns rather than features to add at the end.

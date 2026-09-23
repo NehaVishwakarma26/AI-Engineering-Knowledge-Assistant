@@ -1,0 +1,17 @@
+Docker packages applications and their dependencies into containers. A container image is a portable artifact containing an application, runtime, libraries, and filesystem content required to run the application.
+
+A Dockerfile describes how an image is built. Common instructions include FROM, WORKDIR, COPY, RUN, ENV, EXPOSE, and CMD or ENTRYPOINT. Multi-stage builds can separate compilation dependencies from the smaller runtime image.
+
+Containers are created from images. A container has an isolated process environment and can communicate with other containers through Docker networking.
+
+Port mapping exposes a container port through the host. For example, mapping host port 8080 to container port 80 allows a web server inside the container to be accessed through the host.
+
+Volumes provide persistent storage outside the writable container layer. They are useful for databases and other stateful services because container replacement should not destroy persistent application data.
+
+Docker Compose defines multiple services in a declarative YAML file. A Compose application can include an API, database, message broker, frontend, and supporting services. Environment variables and service names can be used to configure communication.
+
+Docker image layers affect build performance and storage. Placing stable dependency installation steps before frequently changing source files can improve build caching.
+
+Container health checks can verify whether an application is actually ready to accept requests. Starting a container successfully does not necessarily mean the application inside it is healthy.
+
+Production container security includes minimizing the image, avoiding unnecessary packages, scanning dependencies, using non-root users when possible, and not baking secrets into images.

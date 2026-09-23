@@ -1,0 +1,15 @@
+Prompt engineering is the practice of designing the input supplied to a language model so that the model performs a desired task reliably. In an engineering system, prompts should be treated as part of the application rather than casual text.
+
+A useful prompt often separates system instructions, task requirements, context, and the user request. Explicit boundaries help prevent retrieved text from being confused with instructions.
+
+In RAG applications, retrieved documents should be clearly identified as evidence. The model can be instructed to answer using the supplied evidence and to acknowledge when the evidence does not contain enough information.
+
+Structured output is useful when the result must be consumed by software. A system can specify a JSON schema or use a typed model such as Pydantic to validate fields. This is more reliable than asking a model to produce arbitrary prose and attempting to parse it afterward.
+
+Few-shot examples can demonstrate the desired input-output format. However, examples consume context and should be used when they provide measurable value.
+
+Prompt injection is a security concern when untrusted documents or user content are placed into an LLM context. Retrieved content may contain text that looks like instructions. Applications should distinguish data from control instructions and avoid granting models unnecessary authority.
+
+Context engineering extends prompt engineering by considering the entire information supplied to the model: tools, tool results, memories, retrieved documents, conversation state, schemas, and system instructions.
+
+Prompt quality should be evaluated empirically. A change that sounds better to a developer is not necessarily better for the application. Regression tests and representative evaluation datasets make prompt changes safer.

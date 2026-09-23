@@ -1,1 +1,13 @@
-A vector database is a specialized storage system designed to handle high-dimensional vector data, commonly referred to as embeddings. Unlike traditional relational databases that query based on exact keyword matches, vector databases retrieve data using Approximate Nearest Neighbor (ANN) algorithms. Common algorithms include Hierarchical Navigable Small World (HNSW) graphs and Inverted File Index (IVF). When a query vector is submitted, the database calculates distances using metrics such as Cosine Similarity, Euclidean Distance (L2), or Dot Product. This allows AI systems to find semantically similar concepts even if the exact keywords do not match, which is the foundational retrieval mechanism for semantic search and RAG pipelines.
+A vector database stores numerical representations of information called embeddings and provides similarity search over those vectors. Embeddings allow text, images, or other data to be represented in a continuous vector space where related concepts can have nearby representations.
+
+Traditional relational databases are optimized for structured queries involving exact values, joins, indexes, and predicates. Vector databases address a different problem: finding records whose embeddings are similar to a query embedding. Common similarity measures include cosine similarity, Euclidean distance, and dot product.
+
+Approximate Nearest Neighbor (ANN) algorithms are commonly used because comparing a query against every vector becomes expensive as the dataset grows. Hierarchical Navigable Small World (HNSW) graphs provide fast approximate search by navigating a graph of neighboring vectors. Inverted File Index (IVF) methods partition vectors into regions and search selected regions instead of the entire collection.
+
+A vector database record commonly contains an identifier, an embedding, the original document or chunk, and metadata. Metadata filtering can restrict retrieval to a particular project, document type, tenant, date range, or category before or during vector search.
+
+Chroma is a vector database frequently used for local AI applications and prototypes. A persistent Chroma client stores collections on disk. A collection can contain documents, embeddings, metadata, and stable identifiers. Querying a collection with a query embedding returns documents ranked according to the configured distance metric.
+
+Vector databases are particularly useful in semantic search and RAG systems because users do not need to use the exact words that appear in a document. A question about retrieving additional knowledge for a language model can retrieve a passage discussing external grounding even if the wording differs.
+
+Vector search also has limitations. Exact identifiers, error messages, API names, class names, product codes, and uncommon technical terminology can be difficult for pure semantic retrieval. This is one reason hybrid retrieval combines dense vectors with lexical methods such as BM25.
