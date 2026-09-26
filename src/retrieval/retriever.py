@@ -39,9 +39,9 @@ if __name__ == "__main__":
         top_k=10
     )
 
-    for result in results:
-        print("\n--------------------")
-        print("ID:", result["id"])
-        print("Score:", result["score"])
-        print("Text:", result["text"])
-        print("Metadata:", result["metadata"])
+    # for result in results:
+    #     print("\n--------------------")
+    #     print("ID:", result["id"])
+    #     print("Score:", result["score"])
+    #     print("Text:", result["text"])
+    #     print("Metadata:", result["metadata"])

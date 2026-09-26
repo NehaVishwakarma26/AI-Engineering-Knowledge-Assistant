@@ -31,8 +31,8 @@ def reciprocal_rank_fusion(dense_results,bm25_results,k=60,top_k=3):
             + 1/(k+rank)
         )
     
-    print("k=",k)
-    print("RRF scores =",rrf_scores)
+    # print("k=",k)
+    # print("RRF scores =",rrf_scores)
         
     ranked_chunks=sorted(
         rrf_scores.items(),
@@ -66,13 +66,13 @@ if __name__ == "__main__":
     
     reranked_results=rerank(query,hybrid_results,top_k=3)
 
-    print("\n\nRERANKED RESULTS")
+    # print("\n\nRERANKED RESULTS")
 
-    for result in reranked_results:
+    # for result in reranked_results:
 
-        print("\n--------------------")
-        print("ID:", result["id"])
-        print("RRF Score:", result["rrf_score"])
-        print("Text:", result["text"])
-        print("Metadata:", result["metadata"])
-        print("Similarity Score", result["sim_score"])
+    #     print("\n--------------------")
+    #     print("ID:", result["id"])
+    #     print("RRF Score:", result["rrf_score"])
+    #     print("Text:", result["text"])
+    #     print("Metadata:", result["metadata"])
+    #     print("Similarity Score", result["sim_score"])

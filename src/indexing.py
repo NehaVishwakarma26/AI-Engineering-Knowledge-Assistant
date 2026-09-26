@@ -10,15 +10,15 @@ def index_documents():
     with open(CACHE_PATH, "r", encoding="utf-8") as file:
         chunks = json.load(file)
 
-    print(f"Loaded {len(chunks)} contextualized chunks")
+    # print(f"Loaded {len(chunks)} contextualized chunks")
 
     vectors = get_embedding_batch(chunks)
 
-    print(f"Generated {len(vectors)} embeddings")
+    # print(f"Generated {len(vectors)} embeddings")
 
     store_chunks(chunks, vectors)
 
-    print("Indexing complete")
+    # print("Indexing complete")
 
 
 if __name__ == "__main__":

@@ -60,4 +60,4 @@ def store_chunks(contextualized_chunks,vectors):
             for chunk in contextualized_chunks
         ]
     collection.upsert(documents=documents,embeddings=vectors,metadatas=metadata,ids=ids)
-    print(f"Stored {len(documents)} chunks in Chroma")
+    # print(f"Stored {len(documents)} chunks in Chroma")

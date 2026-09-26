@@ -53,7 +53,7 @@ Only use information that can be inferred from the document.
     contextualized_chunks=[]
     
     for i,chunk in enumerate(chunks):
-        print(f"Processing chunk {i+1}/{len(chunks)}....")
+        # print(f"Processing chunk {i+1}/{len(chunks)}....")
         
         response=chain.invoke({
             "document":document_text,
@@ -79,7 +79,7 @@ Only use information that can be inferred from the document.
     
 def get_final_chunks():
     if CACHE_PATH.exists():
-        print("Loading cached contextualized chunks...")
+        # print("Loading cached contextualized chunks...")
         with open(CACHE_PATH,"r",encoding="utf-8") as file:
             return json.load(file)
         
@@ -88,7 +88,7 @@ def get_final_chunks():
     for doc in documents:
         document_text=doc["text"]
         base_chunks=rec_split(document_text)
-        print(f"Created {len(base_chunks)} base chunks \n\n")
+        # print(f"Created {len(base_chunks)} base chunks \n\n")
         chunks=generate_context(
             document_text,
             base_chunks,
@@ -108,5 +108,5 @@ def get_final_chunks():
 
 if __name__=="__main__":
     final_chunks=get_final_chunks()
-    print(f"{len(final_chunks)} generated")
-    print(final_chunks[0])
+    # print(f"{len(final_chunks)} generated")
+    # print(final_chunks[0])
