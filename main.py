@@ -1,37 +1,29 @@
-from src.retrieval.retriever import retrieve
-from src.retrieval.bm25_retriever import bm25_retrieve
-from src.retrieval.hybrid_retriever import reciprocal_rank_fusion
-from src.retrieval.reranker import rerank
-from src.generation.generator import generate_answer
+from fastapi import FastAPI
+from pydantic import BaseModel
 
-def main():
-    query = "What does RAG do?"    
-    dense_results=retrieve(query,top_k=10)
-    bm25_results=bm25_retrieve(query,top_k=10)
-    
-    hybrid_results=reciprocal_rank_fusion(
-        dense_results,
-        bm25_results,
-        k=60,
-        top_k=10
-    )
-    
-    reranked_results=rerank(
-        query,
-        hybrid_results,
-        top_k=3
-    )
-    
-    print("\n\n reranked results")
-    
-    for res in reranked_results:
-        print(res)
-    
-    answer=generate_answer(query,reranked_results)
-    
-    print("\nAnswer:")
-    print(answer)
-    
-    
-if __name__=="__main__":
-    main()
+from src.agents.agent import Agent
+from src.agents.prompts import SYSTEM_PROMPT
+
+
+app = FastAPI(title="DevMind API")
+
+agent = Agent(system_prompt=SYSTEM_PROMPT)
+
+
+class QuestionRequest(BaseModel):
+    question: str
+
+
+class AnswerResponse(BaseModel):
+    answer: str
+
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
+
+@app.post("/ask", response_model=AnswerResponse)
+def ask_question(request: QuestionRequest):
+    answer = agent.ask(request.question)
+    return AnswerResponse(answer=answer)

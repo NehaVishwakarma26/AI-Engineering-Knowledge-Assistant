@@ -5,8 +5,8 @@ from dataclasses import dataclass, field
 
 from ollama import chat, ChatResponse
 
-from config import MODEL_NAME
-from tools import available_functions, tool_schemas, TOOLS
+from .config import MODEL_NAME
+from .tools import available_functions, tool_schemas, TOOLS
 
 def _is_error(tool_message: dict) -> bool:
     """Return True if a tool result contains an error."""
@@ -96,6 +96,3 @@ class Agent:
             last_round_failed=any(_is_error(r) for r in results)
             
         return "Stopped: reached max_turns without a final answer"
-            
-
-

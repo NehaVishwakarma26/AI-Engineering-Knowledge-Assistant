@@ -4,9 +4,11 @@ from agent import Agent
 from prompts import SYSTEM_PROMPT
 
 QUESTION = (
-    "Compare the reranking implementation in this project with the reranking architecture described in the knowledge base. Inspect the actual project implementation."
+    "Find the implementation of hybrid retrieval in this project. "
+    "Inspect the relevant source files and explain how dense retrieval, "
+    "BM25, RRF, and reranking are connected in the actual implementation. "
+    "Do not answer until you have inspected the relevant source code."
 )
-
 
 def main() -> None:
     agent = Agent(system_prompt=SYSTEM_PROMPT)

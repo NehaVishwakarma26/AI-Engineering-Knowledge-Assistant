@@ -1,5 +1,5 @@
 from pathlib import Path
-from config import EXCLUDED_DIRS
+from .config import EXCLUDED_DIRS
 from api_generator import search_knowledge_api
 
 tool_schemas={
